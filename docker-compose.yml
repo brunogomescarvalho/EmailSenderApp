@@ -1,0 +1,15 @@
+services:
+  email-sender-api:
+    image: ${DOCKER_REGISTRY-}sendemailapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: email-sender-api
+    ports:
+      - "8085:8080"
+    environment:
+      - EMAIL_SENDER_ADDRESS=${ADDRESS} 
+      - EMAIL_SENDER_CREDENTIAL=${CREDENTIAL}
+    restart: unless-stopped
+    env_file:
+      - .env
