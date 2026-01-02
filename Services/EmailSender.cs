@@ -7,13 +7,13 @@ namespace EmailSenderApp.Services;
 
 public class EmailSender : IEmailSender
 {
-    public readonly string address;
-    public readonly string credential;
+    private readonly string _address;
+    private readonly string _credential;
 
     public EmailSender(ConfigurationSettings configurationSettings)
     {
-        address = configurationSettings.EmailSenderAddress;
-        credential = configurationSettings.EmailSenderCredential;
+        _address = configurationSettings.EmailSenderAddress;
+        _credential = configurationSettings.EmailSenderCredential;
     }
 
 
@@ -22,14 +22,14 @@ public class EmailSender : IEmailSender
         using var client = new SmtpClient("smtp.gmail.com")
         {
             UseDefaultCredentials = false,
-            Credentials = new NetworkCredential(address, credential),
+            Credentials = new NetworkCredential(_address, _credential),
             Port = 587,
             EnableSsl = true
         };
 
         var message = new MailMessage
         {
-            From = new MailAddress(address, emailRequest.Name, System.Text.Encoding.UTF8),
+            From = new MailAddress(_address, emailRequest.Name, System.Text.Encoding.UTF8),
             Subject = emailRequest.Subject,
             Body = emailRequest.Message,
             IsBodyHtml = true
