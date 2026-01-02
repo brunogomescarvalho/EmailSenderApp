@@ -8,8 +8,8 @@ services:
     ports:
       - "8085:8080"
     environment:
-      - EMAIL_SENDER_ADDRESS=${ADDRESS} 
-      - EMAIL_SENDER_CREDENTIAL=${CREDENTIAL}
+      - EMAIL_SENDER_ADDRESS=${EMAIL_SENDER_ADDRESS} 
+      - EMAIL_SENDER_CREDENTIAL=${EMAIL_SENDER_CREDENTIAL}
     restart: unless-stopped
     env_file:
       - .env
